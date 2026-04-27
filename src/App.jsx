@@ -8,14 +8,12 @@ function App() {
     <BrowserRouter>
       <Header />
 
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/country/:name" element={<div>Country Page</div>} />
-          <Route path="/favourites" element={<div>Favourites Page</div>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/country/:name" element={<div>Country Page</div>} />
+        <Route path="/favourites" element={<div>Favourites Page</div>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   );
 }

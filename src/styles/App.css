@@ -46,3 +46,67 @@
   padding: 40px;
   text-align: center;
 }
+
+/* GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  display: block;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* FLAG */
+.card__flag {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* BODY */
+.card__body {
+  padding: 15px;
+}
+
+.card__name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card__body p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.card__body span {
+  font-weight: 600;
+  color: #222;
+}
+
+/* STATUS */
+.home__status {
+  padding: 20px;
+  color: #666;
+}
+
+.home__status--error {
+  color: red;
+}
