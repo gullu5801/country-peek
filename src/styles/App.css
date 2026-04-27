@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #0077cc;
+  color: white;
+}
+
+.header__brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header__nav {
+  display: flex;
+  gap: 16px;
+}
+
+.header__nav a {
+  font-weight: 500;
+}
+
+.search-bar {
+  padding: 20px;
+}
+
+.search-bar__input {
+  width: 100%;
+  max-width: 480px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.home {
+  padding: 20px;
+}
+
+.home__placeholder {
+  margin-top: 16px;
+  color: #777;
+}
+
+.not-found {
+  padding: 40px;
+  text-align: center;
+}
