@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import CountryCard from "../components/CountryCard";
+import "../styles/App.css";
 
 function Home() {
   const [query, setQuery] = useState("");
@@ -9,7 +10,7 @@ function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // If input empty → reset
+    // Reset when input is empty
     if (!query.trim()) {
       setCountries([]);
       setError(null);
@@ -25,21 +26,23 @@ function Home() {
           return res.json();
         })
         .then((data) => {
-          setCountries(data);
-          setError(null);
+          // ✅ Edge case handling
+          if (!Array.isArray(data) || data.length === 0) {
+            setCountries([]);
+            setError("No countries found.");
+          } else {
+            setCountries(data);
+            setError(null);
+          }
         })
         .catch(() => {
           setCountries([]);
           setError("No countries found.");
         })
-        .finally(() => {
-          setLoading(false);
-        });
+        .finally(() => setLoading(false));
     }, 400);
 
-    // Cleanup → cancels previous timer
     return () => clearTimeout(timer);
-
   }, [query]);
 
   return (
@@ -63,7 +66,12 @@ function Home() {
         </div>
       )}
 
-      {/* Placeholder */}
+      {/* No Results */}
+      {!loading && !error && countries.length === 0 && query && (
+        <p className="home__status">No results found.</p>
+      )}
+
+      {/* Initial Placeholder */}
       {!loading && !error && countries.length === 0 && !query && (
         <p className="home__status">
           Start searching to explore countries.
