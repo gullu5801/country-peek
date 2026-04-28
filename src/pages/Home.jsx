@@ -10,7 +10,7 @@ function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Reset when input is empty
+    // Reset if empty input
     if (!query.trim()) {
       setCountries([]);
       setError(null);
@@ -22,22 +22,34 @@ function Home() {
 
       fetch(`https://restcountries.com/v3.1/name/${query}`)
         .then((res) => {
-          if (!res.ok) throw new Error("No countries found");
+          // 🔥 Better error differentiation
+          if (!res.ok) {
+            if (res.status === 404) {
+              throw new Error("No countries found");
+            } else {
+              throw new Error("API error");
+            }
+          }
           return res.json();
         })
         .then((data) => {
-          // ✅ Edge case handling
+          // 🔥 Edge case: empty/invalid response
           if (!Array.isArray(data) || data.length === 0) {
             setCountries([]);
-            setError("No countries found.");
+            setError("No countries match your search.");
           } else {
             setCountries(data);
             setError(null);
           }
         })
-        .catch(() => {
+        .catch((err) => {
           setCountries([]);
-          setError("No countries found.");
+
+          if (err.message === "No countries found") {
+            setError("No countries match your search.");
+          } else {
+            setError("Something went wrong. Please try again.");
+          }
         })
         .finally(() => setLoading(false));
     }, 400);
@@ -50,11 +62,15 @@ function Home() {
       <SearchBar query={query} onQueryChange={setQuery} />
 
       {/* Loading */}
-      {loading && <p className="home__status">Loading...</p>}
+      {loading && (
+        <p className="home__status">Fetching countries...</p>
+      )}
 
       {/* Error */}
       {error && (
-        <p className="home__status home__status--error">{error}</p>
+        <p className="home__status home__status--error">
+          {error}
+        </p>
       )}
 
       {/* Cards */}
