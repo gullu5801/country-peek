@@ -1,0 +1,136 @@
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+
+  /* upgraded */
+  background: linear-gradient(135deg, #0077cc, #005fa3);
+  color: white;
+}
+
+.header__brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header__nav {
+  display: flex;
+  gap: 16px;
+}
+
+.header__nav a {
+  font-weight: 500;
+}
+
+/* NEW: subtle hover */
+.header__nav a:hover {
+  text-decoration: underline;
+}
+
+/* SEARCH */
+.search-bar {
+  padding: 20px;
+}
+
+.search-bar__input {
+  width: 100%;
+  max-width: 480px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  /* NEW: smooth interaction */
+  outline: none;
+  transition: 0.3s;
+}
+
+/* NEW: focus effect */
+.search-bar__input:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0, 119, 204, 0.3);
+}
+
+/* HOME */
+.home {
+  padding: 20px;
+}
+
+.home__placeholder {
+  margin-top: 16px;
+  color: #777;
+}
+
+/* STATUS */
+.home__status {
+  padding: 20px;
+  color: #666;
+}
+
+.home__status--error {
+  color: red;
+}
+
+/* NOT FOUND */
+.not-found {
+  padding: 40px;
+  text-align: center;
+}
+
+/* GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  display: block;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+
+  /* upgraded shadow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+/* upgraded hover */
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* FLAG */
+.card__flag {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* BODY */
+.card__body {
+  padding: 15px;
+}
+
+.card__name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card__body p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.card__body span {
+  font-weight: 600;
+  color: #222;
+}

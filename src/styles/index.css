@@ -1,0 +1,35 @@
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BODY */
+body {
+  /* upgraded font (fallback safe) */
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  /* smoother background */
+  background-color: #f5f7fa;
+  color: #222;
+
+  /* NEW: improves text rendering */
+  line-height: 1.5;
+}
+
+/* LINKS */
+a {
+  text-decoration: none;
+  color: inherit;
+
+  /* NEW: smooth hover feel */
+  transition: 0.2s;
+}
+
+/* NAV HOVER (kept from your file) */
+.header__nav a:hover {
+  text-decoration: underline;
+}
