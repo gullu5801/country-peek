@@ -7,29 +7,18 @@
   padding: 0;
 }
 
-/* BODY */
+/* GLOBAL */
 body {
-  /* upgraded font (fallback safe) */
-  font-family: "Segoe UI", Arial, sans-serif;
-
-  /* smoother background */
-  background-color: #f5f7fa;
-  color: #222;
-
-  /* NEW: improves text rendering */
-  line-height: 1.5;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: #f4f7fb;
+  color: #1a1a1a;
 }
 
 /* LINKS */
 a {
   text-decoration: none;
   color: inherit;
-
-  /* NEW: smooth hover feel */
   transition: 0.2s;
-}
-
-/* NAV HOVER (kept from your file) */
-.header__nav a:hover {
-  text-decoration: underline;
 }
