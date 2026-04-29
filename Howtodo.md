@@ -1,38 +1,21 @@
-Step 1 : create a git repo as in LU and clone it
+Step 1 : create a new branch
+    -> git checkout -b part-4/filter-sort-theme
 
-Step 2 : Write code to initialise the project then install React-Router-Dom
+Step 2 : Add code in ThemeContext.jsx for selecting themes
 
--> npm create vite@latest . -- --template react
--> npm install react-router-dom
+Step 3 : Change main.jsx wrap the program inside themeProvider
 
-Step 3 : Structure the code
+Step 4 : Update header.jsx
 
-![Part1FolderStructure](./src/assets/Part1FolderStructure.png)
+Step 5 : Code for filterbar.jsx
 
-Step 4 : change main.jsx
+Step 6 : Update Home.jsx (Important)
 
-Step 5 : chnage app.jsx
+Step 7 : Update index.css
 
-Step 6 : change components/Header.jsx
+Step 8 : update app.css
 
-Step 7 : change components/SearchBar.jsx
+Step 9 : push it to github
 
-Step 8 : change pages/Home.jsx 
 
-Step 9 : change pages/NotFound.jsx
-
-Step 10 : change pages/CountryPage.jsx
-
-Step 11 : change pages/Favourites.jsx
-
-Step 12 : change components/CountryCard.jsx
-
-Step 13 : change components/FilterBar.jsx
-
-Step 14 : change components/Loader.jsx
-
-Step 15 : chnage context/ThemeContext.jsx
-
-Step 16 : change hooks/useCountries.js
-
-Step 17 : add css
+![Part 4 before commit](./src/assets/Part4Folders.png)
