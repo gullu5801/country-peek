@@ -252,3 +252,42 @@
     gap: 10px;
   }
 }
+
+.header {
+  background: var(--header-bg);
+}
+
+.card {
+  background: var(--card-bg);
+}
+
+.search-bar__input {
+  border: 1px solid var(--input-border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  padding: 0 20px 20px;
+}
+
+.filter-bar select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+/* THEME BUTTON */
+.theme-toggle {
+  background: none;
+  border: 1px solid white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
