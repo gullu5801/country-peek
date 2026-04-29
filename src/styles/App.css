@@ -17,16 +17,30 @@
 .header__nav {
   display: flex;
   gap: 24px;
+  align-items: center;
 }
 
-.header__nav a {
+/* COMMON STYLE FOR NAV ITEMS */
+.header__nav a,
+.nav-btn {
   font-size: 16px;
   font-weight: 500;
   position: relative;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-/* underline animation */
-.header__nav a::after {
+/* BUTTON RESET */
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* UNDERLINE ANIMATION (SHARED) */
+.header__nav a::after,
+.nav-btn::after {
   content: "";
   position: absolute;
   width: 0%;
@@ -37,8 +51,15 @@
   transition: 0.3s;
 }
 
-.header__nav a:hover::after {
+.header__nav a:hover::after,
+.nav-btn:hover::after {
   width: 100%;
+}
+
+/* OPTIONAL HOVER POLISH */
+.header__nav a:hover,
+.nav-btn:hover {
+  opacity: 0.85;
 }
 
 /* SEARCH */
