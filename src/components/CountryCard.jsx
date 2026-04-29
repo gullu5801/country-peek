@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function CountryCard({ country }) {
+  const location = useLocation();
+
   const {
     name,
     flags,
@@ -11,8 +13,11 @@ function CountryCard({ country }) {
   } = country;
 
   return (
-    <Link to={`/country/${cca3}`} className="card">
-      {/* FLAG (safe fallback) */}
+    <Link
+      to={`/country/${cca3}`}
+      state={{ from: location }}   // 🔥 important
+      className="card"
+    >
       <img
         src={
           flags?.svg ||
@@ -29,7 +34,7 @@ function CountryCard({ country }) {
 
         <p>
           <span>Population:</span>{" "}
-          {population ? population.toLocaleString() : "N/A"}
+          {population?.toLocaleString() || "N/A"}
         </p>
 
         <p>

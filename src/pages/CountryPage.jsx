@@ -1,24 +1,31 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import useCountry from "../hooks/useCountries";
 import "../styles/App.css";
 
 function CountryPage() {
   const { code } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { country, loading, error } = useCountry(code);
 
-  // Loading
+  // 🔙 Smart back navigation
+  const handleBack = () => {
+    if (location.state?.from) {
+      navigate(-1); // go back to search page
+    } else {
+      navigate("/"); // fallback
+    }
+  };
+
   if (loading) {
     return <p className="page-status">Loading country...</p>;
   }
 
-  // Error
   if (error) {
     return <p className="page-status page-status--error">{error}</p>;
   }
 
-  // Safety
   if (!country) return null;
 
   const {
@@ -33,7 +40,6 @@ function CountryPage() {
     borders,
   } = country;
 
-  // Convert objects → arrays safely
   const languageList = languages ? Object.values(languages) : [];
   const currencyList = currencies
     ? Object.values(currencies).map((c) => c.name)
@@ -41,13 +47,11 @@ function CountryPage() {
 
   return (
     <div className="country-page">
-      {/* Back button */}
-      <button className="back-btn" onClick={() => navigate(-1)}>
+      <button className="back-btn" onClick={handleBack}>
         ← Back
       </button>
 
       <div className="country-page__layout">
-        {/* Flag */}
         <img
           src={
             flags?.svg ||
@@ -63,46 +67,23 @@ function CountryPage() {
           </h2>
 
           <p className="country-page__official">
-            {name?.official || "No official name"}
+            {name?.official || "N/A"}
           </p>
 
           <div className="country-page__details">
-            {/* LEFT */}
             <div>
-              <p>
-                <strong>Population:</strong>{" "}
-                {population?.toLocaleString() || "N/A"}
-              </p>
-              <p>
-                <strong>Region:</strong> {region || "N/A"}
-              </p>
-              <p>
-                <strong>Subregion:</strong> {subregion || "N/A"}
-              </p>
-              <p>
-                <strong>Capital:</strong>{" "}
-                {capital?.[0] ?? "N/A"}
-              </p>
+              <p><strong>Population:</strong> {population?.toLocaleString() || "N/A"}</p>
+              <p><strong>Region:</strong> {region || "N/A"}</p>
+              <p><strong>Subregion:</strong> {subregion || "N/A"}</p>
+              <p><strong>Capital:</strong> {capital?.[0] ?? "N/A"}</p>
             </div>
 
-            {/* RIGHT */}
             <div>
-              <p>
-                <strong>Languages:</strong>{" "}
-                {languageList.length
-                  ? languageList.join(", ")
-                  : "N/A"}
-              </p>
-              <p>
-                <strong>Currencies:</strong>{" "}
-                {currencyList.length
-                  ? currencyList.join(", ")
-                  : "N/A"}
-              </p>
+              <p><strong>Languages:</strong> {languageList.join(", ") || "N/A"}</p>
+              <p><strong>Currencies:</strong> {currencyList.join(", ") || "N/A"}</p>
             </div>
           </div>
 
-          {/* Borders */}
           {borders && borders.length > 0 && (
             <div className="country-page__borders">
               <strong>Border Countries:</strong>

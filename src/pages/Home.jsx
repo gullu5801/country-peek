@@ -1,16 +1,30 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import CountryCard from "../components/CountryCard";
-import "../styles/App.css";
 
 function Home() {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialQuery = searchParams.get("search") || "";
+
+  const [query, setQuery] = useState(initialQuery);
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // 🔍 Update query + URL
+  const handleSearch = (value) => {
+    setQuery(value);
+
+    if (value) {
+      setSearchParams({ search: value });
+    } else {
+      setSearchParams({});
+    }
+  };
+
   useEffect(() => {
-    // Reset if empty input
     if (!query.trim()) {
       setCountries([]);
       setError(null);
@@ -22,18 +36,10 @@ function Home() {
 
       fetch(`https://restcountries.com/v3.1/name/${query}`)
         .then((res) => {
-          // 🔥 Better error differentiation
-          if (!res.ok) {
-            if (res.status === 404) {
-              throw new Error("No countries found");
-            } else {
-              throw new Error("API error");
-            }
-          }
+          if (!res.ok) throw new Error("No countries found");
           return res.json();
         })
         .then((data) => {
-          // 🔥 Edge case: empty/invalid response
           if (!Array.isArray(data) || data.length === 0) {
             setCountries([]);
             setError("No countries match your search.");
@@ -42,14 +48,9 @@ function Home() {
             setError(null);
           }
         })
-        .catch((err) => {
+        .catch(() => {
           setCountries([]);
-
-          if (err.message === "No countries found") {
-            setError("No countries match your search.");
-          } else {
-            setError("Something went wrong. Please try again.");
-          }
+          setError("Something went wrong. Please try again.");
         })
         .finally(() => setLoading(false));
     }, 400);
@@ -59,21 +60,14 @@ function Home() {
 
   return (
     <div className="home">
-      <SearchBar query={query} onQueryChange={setQuery} />
+      <SearchBar query={query} onQueryChange={handleSearch} />
 
-      {/* Loading */}
-      {loading && (
-        <p className="home__status">Fetching countries...</p>
-      )}
+      {loading && <p className="home__status">Loading...</p>}
 
-      {/* Error */}
       {error && (
-        <p className="home__status home__status--error">
-          {error}
-        </p>
+        <p className="home__status home__status--error">{error}</p>
       )}
 
-      {/* Cards */}
       {!loading && !error && countries.length > 0 && (
         <div className="cards-grid">
           {countries.map((country) => (
@@ -82,12 +76,10 @@ function Home() {
         </div>
       )}
 
-      {/* No Results */}
       {!loading && !error && countries.length === 0 && query && (
         <p className="home__status">No results found.</p>
       )}
 
-      {/* Initial Placeholder */}
       {!loading && !error && countries.length === 0 && !query && (
         <p className="home__status">
           Start searching to explore countries.
