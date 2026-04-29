@@ -1,15 +1,21 @@
-import { Link } from "react-router-dom";
-import "../styles/App.css";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    navigate("/", { replace: true }); // clears history
+  };
+
   return (
     <header className="header">
-      <Link to="/" className="header__brand">
-        CountryPeek
-      </Link>
+      <h1 className="header__brand">CountryPeek</h1>
 
       <nav className="header__nav">
-        <Link to="/">Home</Link>
+        <button onClick={handleHomeClick} className="nav-btn">
+          Home
+        </button>
+
         <Link to="/favourites">Favourites</Link>
       </nav>
     </header>
